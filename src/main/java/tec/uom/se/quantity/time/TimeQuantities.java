@@ -33,6 +33,9 @@ import static tec.uom.se.unit.Units.SECOND;
 import static tec.uom.se.unit.Units.HOUR;
 import static tec.uom.se.unit.Units.DAY;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
@@ -46,6 +49,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Time;
 
+import tec.uom.se.ComparableQuantity;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.TransformedUnit;
@@ -131,6 +135,70 @@ public final class TimeQuantities {
   public static Quantity<Time> getQuantity(LocalTime localTimeA, Supplier<TemporalAdjuster> supplier) {
     LocalTime localTimeB = localTimeA.with(supplier.get());
     return getQuantity(localTimeA, localTimeB);
+  }
+
+  // Constants used only to convert to and from Duration
+  private static final BigInteger NANOS_PER_SECOND = BigInteger.valueOf(1_000_000_000);
+  private static final Duration MAX_DURATION_TO_NANOS = Duration.ofNanos(Long.MAX_VALUE);
+  private static final Duration MIN_DURATION_TO_NANOS = Duration.ofNanos(Long.MIN_VALUE);
+
+  // For checking that a Quantity<Time> is within the range of a Duration.
+  private static final ComparableQuantity<Time> MAX_QUANTITY_TO_DURATION = getQuantity(MAX_DURATION_TO_NANOS.multipliedBy(1_000_000_000));
+  private static final ComparableQuantity<Time> MIN_QUANTITY_TO_DURATION = getQuantity(MIN_DURATION_TO_NANOS.multipliedBy(1_000_000_000));
+
+  /**
+   * Creates a {@link Quantity<Time>} from a {@link Duration}. The precision is nanoseconds.
+   *
+   * @param duration
+   * @see {@link Duration}
+   * @author Chris Hennick
+   * @since 1.0.9
+   */
+  public static ComparableQuantity<Time> getQuantity(Duration duration) {
+    Objects.requireNonNull(duration);
+    Number nanos;
+    if (duration.compareTo(MAX_DURATION_TO_NANOS) > 0 || duration.compareTo(MIN_DURATION_TO_NANOS) < 0) {
+      // duration is longer than Long.MAX_VALUE ns (~292.3 years)
+      // for some reason Duration.toSeconds() doesn't exist, so use minutes and
+      // nanoseconds in a minute
+      nanos = BigInteger.valueOf(duration.getSeconds()).multiply(NANOS_PER_SECOND).add(BigInteger.valueOf(duration.getNano()));
+    } else {
+      nanos = duration.toNanos();
+    }
+    return Quantities.getQuantity(nanos, NANOSECOND);
+  }
+
+  /**
+   * Creates a {@link Duration} from a {@link Quantity<Time>}.
+   *
+   * @param timeQuantity
+   * @see {@link Quantity<Time>}
+   *
+   * @throws ArithmeticException
+   *           if the {@link Quantity<Time>} in seconds is outside the range of a long.
+   * 
+   * @author Chris Hennick
+   * @since 1.0.9
+   */
+  public static Duration getDuration(Quantity<Time> timeQuantity) {
+    if (MAX_QUANTITY_TO_DURATION.compareTo(timeQuantity) < 0 || MIN_QUANTITY_TO_DURATION.compareTo(timeQuantity) > 0) {
+      throw new ArithmeticException("Conversion to Duration would overflow");
+    }
+    Number nanos = timeQuantity.to(NANOSECOND).getValue();
+    long seconds;
+    long remainderNanos;
+    if (nanos instanceof BigDecimal) {
+      nanos = ((BigDecimal) nanos).toBigInteger();
+    }
+    if (nanos instanceof BigInteger) {
+      BigInteger[] divided = ((BigInteger) nanos).divideAndRemainder(NANOS_PER_SECOND);
+      seconds = divided[0].longValue();
+      remainderNanos = divided[1].longValue();
+    } else {
+      seconds = 0;
+      remainderNanos = nanos.longValue();
+    }
+    return Duration.ofSeconds(seconds, remainderNanos);
   }
 
   /**
