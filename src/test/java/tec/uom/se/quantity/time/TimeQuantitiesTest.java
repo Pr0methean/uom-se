@@ -33,6 +33,7 @@ import static tec.uom.se.unit.Units.DAY;
 import static tec.uom.se.unit.Units.HOUR;
 import static tec.uom.se.unit.Units.MINUTE;
 import static tec.uom.se.unit.Units.SECOND;
+import static tec.uom.se.unit.Units.HERTZ;
 import static java.time.temporal.ChronoUnit.*;
 
 import java.time.DayOfWeek;
@@ -46,6 +47,7 @@ import java.time.temporal.TemporalAdjusters;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
+import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Time;
 
 import org.junit.Assert;
@@ -198,4 +200,13 @@ public class TimeQuantitiesTest {
 				Integer.valueOf(time.getValue().intValue()));
 		Assert.assertEquals(Units.HOUR, time.getUnit());
 	}
+
+  @Test
+  public void inverseTest() {
+    Unit<Frequency> hertz = (Unit<Frequency>) (Units.SECOND.inverse());
+    TemporalQuantity tenSeconds = TemporalQuantity.of(1, SECONDS);
+    Quantity<Frequency> perTenSeconds = tenSeconds.inverse();
+    Assert.assertEquals(0.1, perTenSeconds.getValue().doubleValue());
+    Assert.assertEquals(Units.HERTZ, perTenSeconds.getUnit());
+  }
 }
