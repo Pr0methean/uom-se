@@ -203,10 +203,9 @@ public class TimeQuantitiesTest {
 
   @Test
   public void inverseTest() {
-    Unit<Frequency> hertz = (Unit<Frequency>) (Units.SECOND.inverse());
     TemporalQuantity tenSeconds = TemporalQuantity.of(1, SECONDS);
     Quantity<Frequency> perTenSeconds = tenSeconds.inverse();
     Assert.assertEquals(0.1, perTenSeconds.getValue().doubleValue());
-    Assert.assertEquals(Units.HERTZ, perTenSeconds.getUnit());
+    Assert.assertEquals(HERTZ, perTenSeconds.getUnit());
   }
 }
