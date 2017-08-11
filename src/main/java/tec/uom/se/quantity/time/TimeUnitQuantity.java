@@ -44,6 +44,7 @@ import javax.measure.Quantity;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
+import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Time;
 
 import tec.uom.se.AbstractQuantity;

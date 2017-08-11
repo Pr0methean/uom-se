@@ -35,6 +35,7 @@ import static tec.uom.se.unit.Units.MINUTE;
 import static tec.uom.se.unit.Units.SECOND;
 import static tec.uom.se.unit.Units.HERTZ;
 import static java.time.temporal.ChronoUnit.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -65,7 +66,7 @@ public class TimeQuantitiesTest {
     TemporalQuantity day = TemporalQuantity.of(1, DAYS);
     TemporalQuantity hour = TemporalQuantity.of(1, HOURS);
     TemporalQuantity minute = TemporalQuantity.of(1, MINUTES);
-    TemporalQuantity second = TemporalQuantity.of(1, SECONDS);
+    TemporalQuantity second = TemporalQuantity.of(1, TemporalUnit.SECONDS);
     TemporalQuantity microSecond = TemporalQuantity.of(1, MICROS);
     TemporalQuantity milliSecond = TemporalQuantity.of(1, MILLIS);
     TemporalQuantity nanoSecond = TemporalQuantity.of(1, NANOS);
@@ -107,7 +108,7 @@ public class TimeQuantitiesTest {
     TemporalQuantity day = TemporalQuantity.of(1, DAYS);
     TemporalQuantity hour = TemporalQuantity.of(1, HOURS);
     TemporalQuantity minute = TemporalQuantity.of(1, MINUTES);
-    TemporalQuantity second = TemporalQuantity.of(1, SECONDS);
+    TemporalQuantity second = TemporalQuantity.of(1, TemporalUnit.SECONDS);
     TemporalQuantity microSecond = TemporalQuantity.of(1, MICROS);
     TemporalQuantity milliSecond = TemporalQuantity.of(1, MILLIS);
     TemporalQuantity nanoSecond = TemporalQuantity.of(1, NANOS);
@@ -126,7 +127,7 @@ public class TimeQuantitiesTest {
     TemporalQuantity day = TemporalQuantity.of(1, DAYS);
     TemporalQuantity hour = TemporalQuantity.of(1, HOURS);
     TemporalQuantity minute = TemporalQuantity.of(1, MINUTES);
-    TemporalQuantity second = TemporalQuantity.of(1, SECONDS);
+    TemporalQuantity second = TemporalQuantity.of(1, TemporalUnit.SECONDS);
     TemporalQuantity microSecond = TemporalQuantity.of(1, MICROS);
     TemporalQuantity milliSecond = TemporalQuantity.of(1, MILLIS);
     TemporalQuantity nanoSecond = TemporalQuantity.of(1, NANOS);
@@ -202,10 +203,18 @@ public class TimeQuantitiesTest {
 	}
 
   @Test
-  public void inverseTest() {
-    TemporalQuantity tenSeconds = TemporalQuantity.of(1, SECONDS);
-    Quantity<Frequency> perTenSeconds = tenSeconds.inverse();
-    Assert.assertEquals(0.1, perTenSeconds.getValue().doubleValue());
+  public void inverseTest_TemporalQuantity() {
+    Quantity<Time> tenSeconds = TimeQuantities.getQuantity(10, TemporalUnit.SECONDS);
+    Quantity<Frequency> perTenSeconds = (Quantity<Frequency>) (tenSeconds.inverse());
+    Assert.assertEquals(0.1, perTenSeconds.getValue().doubleValue(), 1E-15);
+    Assert.assertEquals(HERTZ, perTenSeconds.getUnit());
+  }
+
+  @Test
+  public void inverseTest_TimeUnitQuantity() {
+    Quantity<Time> tenSeconds = TimeQuantities.getQuantity(10, TimeUnit.SECONDS);
+    Quantity<Frequency> perTenSeconds = (Quantity<Frequency>) (tenSeconds.inverse());
+    Assert.assertEquals(0.1, perTenSeconds.getValue().doubleValue(), 1E-15);
     Assert.assertEquals(HERTZ, perTenSeconds.getUnit());
   }
 }
