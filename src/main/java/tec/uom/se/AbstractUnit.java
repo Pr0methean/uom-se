@@ -80,7 +80,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    *      normalize</a>
    * @see <a href= "http://www.av8n.com/physics/dimensionless-units.htm">Units of Dimension One</a>
    */
-  public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<>();
+  public static final Unit<Dimensionless> ONE = new ProductUnit<>();
 
   /**
    * Holds the name.
@@ -315,12 +315,12 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
-  public final AbstractUnit<Q> alternate(String symbol) {
+  public final Unit<Q> alternate(String symbol) {
     return new AlternateUnit(this, symbol);
   }
 
   @Override
-  public final AbstractUnit<Q> transform(UnitConverter operation) {
+  public final Unit<Q> transform(UnitConverter operation) {
     Unit<Q> systemUnit = this.getSystemUnit();
     UnitConverter cvtr;
     if (this.isSystemUnit()) {
@@ -328,22 +328,22 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
     } else {
       cvtr = operation;
     }
-    if (cvtr.equals(AbstractConverter.IDENTITY) && systemUnit instanceof AbstractUnit<?>) {
-      return (AbstractUnit<Q>) systemUnit;
+    if (cvtr.equals(AbstractConverter.IDENTITY)) {
+      return systemUnit;
     } else {
       return new TransformedUnit<>(null, this, systemUnit, cvtr);
     }
   }
 
   @Override
-  public final AbstractUnit<Q> shift(double offset) {
+  public final Unit<Q> shift(double offset) {
     if (offset == 0)
       return this;
     return transform(new AddConverter(offset));
   }
 
   @Override
-  public final AbstractUnit<Q> multiply(double factor) {
+  public final Unit<Q> multiply(double factor) {
     if (factor == 1)
       return this;
     if (isLongValue(factor))
@@ -367,7 +367,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    * @return <code>this * that</code>
    */
   @Override
-  public final AbstractUnit<?> multiply(Unit<?> that) {
+  public final Unit<?> multiply(Unit<?> that) {
     if (that instanceof AbstractUnit)
       return multiply((AbstractUnit<?>) that);
     // return that.multiply(this); // Commutatif.
@@ -381,11 +381,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    *          the physical unit multiplicand.
    * @return <code>this * that</code>
    */
-  protected final AbstractUnit<?> multiply(AbstractUnit<?> that) {
+  protected final Unit<?> multiply(AbstractUnit<?> that) {
     if (this.equals(ONE))
-      return ONE;
+      return that;
     if (that.equals(ONE))
-      return ONE;
+      return this;
     return ProductUnit.getProductInstance(this, that);
   }
 
@@ -395,7 +395,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    * @return <code>1 / this</code>
    */
   @Override
-  public final AbstractUnit<?> inverse() {
+  public final Unit<?> inverse() {
     if (this.equals(ONE))
       return this;
     return ProductUnit.getQuotientInstance(ONE, this);
@@ -415,7 +415,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    * @return this unit divided by the specified divisor.
    */
   @Override
-  public final AbstractUnit<Q> divide(double divisor) {
+  public final Unit<Q> divide(double divisor) {
     if (divisor == 1)
       return this;
     if (isLongValue(divisor))
@@ -431,7 +431,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    * @return <code>this.multiply(that.inverse())</code>
    */
   @Override
-  public final AbstractUnit<?> divide(Unit<?> that) {
+  public final Unit<?> divide(Unit<?> that) {
     return this.multiply(that.inverse());
   }
 
@@ -442,7 +442,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    *          the physical unit divisor.
    * @return <code>this.multiply(that.inverse())</code>
    */
-  protected final AbstractUnit<?> divide(AbstractUnit<?> that) {
+  protected final Unit<?> divide(AbstractUnit<?> that) {
     return this.multiply(that.inverse());
   }
 
@@ -456,7 +456,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    *           if <code>n == 0</code> or if this operation would result in an unit with a fractional exponent.
    */
   @Override
-  public final AbstractUnit<?> root(int n) {
+  public final Unit<?> root(int n) {
     if (n > 0)
       return ProductUnit.getRootInstance(this, n);
     else if (n == 0)
@@ -474,7 +474,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    * @return the result of raising this unit to the exponent.
    */
   @Override
-  public final AbstractUnit<?> pow(int n) {
+  public final Unit<?> pow(int n) {
     if (n > 0)
       return this.multiply(this.pow(n - 1));
     else if (n == 0)

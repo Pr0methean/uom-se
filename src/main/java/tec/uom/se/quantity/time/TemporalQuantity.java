@@ -284,7 +284,7 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 
   @Override
   public ComparableQuantity<Frequency> inverse() {
-    return (ComparableQuantity<Frequency>) (toQuantity().inverse());
+    return Quantities.getQuantity(1d / value.doubleValue(), toUnit(timeUnit).inverse()).asType(Frequency.class);
   }
 
   @Override
