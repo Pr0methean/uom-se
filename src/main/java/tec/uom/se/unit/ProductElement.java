@@ -64,10 +64,6 @@ final class ElementProduct<T extends Quantity<T>> {
    */
   ElementProduct(Unit<T> unit, int pow, int root) {
     this.unit = unit;
-    if (root < 0) {
-      pow = -pow;
-      root = -root;
-    }
     this.pow = pow;
     this.root = root;
   }
