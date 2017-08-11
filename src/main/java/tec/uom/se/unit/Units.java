@@ -214,7 +214,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The SI unit for power, radiant, flux (standard name <code>W</code>). One watt is equal to one joule per second. It is named after the British
    * scientist James Watt (1736-1819).
    */
-  public static final AbstractUnit<Power> WATT = addUnit(new AlternateUnit<Power>(JOULE.divide(SECOND), "W"), Power.class);
+  public static final AlternateUnit<Power> WATT = addUnit(new AlternateUnit<Power>(JOULE.divide(SECOND), "W"), Power.class);
 
   /**
    * The SI unit for electric charge, quantity of electricity (standard name <code>C</code>). One Coulomb is equal to the quantity of charge
@@ -457,13 +457,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * @return <code>unit</code>.
    */
   private static <U extends AbstractUnit<?>> U addUnit(U unit, Class<? extends Quantity<?>> type) {
-    try {
-      INSTANCE.units.add(unit);
-      INSTANCE.quantityToUnit.put(type, unit);
-      return unit;
-    } catch (Exception e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
-    }
+    INSTANCE.units.add(unit);
+    INSTANCE.quantityToUnit.put(type, unit);
+    return unit;
   }
 }

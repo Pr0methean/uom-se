@@ -413,9 +413,12 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     // Returns or creates instance.
     if (resultIndex == 0)
       return AbstractUnit.ONE;
-    else if ((resultIndex == 1) && (result[0].pow == result[0].root) && result[0].unit instanceof AbstractUnit<?>)
-      return (AbstractUnit<?>) (result[0].unit);
-    else {
+    else if (resultIndex == 1 && result[0].pow == result[0].root) {
+      if (result[0].unit instanceof AbstractUnit<?>)
+        return (AbstractUnit<?>) (result[0].unit);
+      else
+        return new ProductUnit(result);
+    } else {
       Element[] elems = new Element[resultIndex];
       System.arraycopy(result, 0, elems, 0, resultIndex);
       return new ProductUnit(elems);
