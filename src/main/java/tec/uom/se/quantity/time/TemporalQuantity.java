@@ -62,8 +62,8 @@ import tec.uom.se.quantity.Quantities;
  */
 public final class TemporalQuantity extends AbstractQuantity<Time> {
   /**
-     * 
-     */
+   *
+   */
   private static final long serialVersionUID = 6835738653744691425L;
 
   private final TemporalUnit timeUnit;
@@ -151,7 +151,7 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
    * @return this class converted to Quantity
    */
   public Quantity<Time> toQuantity() {
-    return TimeQuantities.fromDuration(amount).to(toUnit());
+    return TimeQuantities.getQuantity(amount).to(toUnit());
   }
 
   public TemporalQuantity to(TemporalUnit timeUnit) {
