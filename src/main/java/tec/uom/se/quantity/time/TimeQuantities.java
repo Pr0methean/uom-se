@@ -33,6 +33,7 @@ import static tec.uom.se.unit.Units.SECOND;
 import static tec.uom.se.unit.Units.HOUR;
 import static tec.uom.se.unit.Units.DAY;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.Duration;
 import java.time.LocalTime;
@@ -48,6 +49,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Time;
 
+import tec.uom.se.ComparableQuantity;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.TransformedUnit;
@@ -141,8 +143,8 @@ public final class TimeQuantities {
   private static final Duration MIN_DURATION_TO_NANOS = Duration.ofNanos(Long.MIN_VALUE);
 
   // For checking that a Quantity<Time> is within the range of a Duration.
-  private static final Quantity<Time> MAX_QUANTITY_TO_DURATION = getQuantity(MAX_DURATION_TO_NANOS.multipliedBy(1_000_000_000));
-  private static final Quantity<Time> MIN_QUANTITY_TO_DURATION = getQuantity(MIN_DURATION_TO_NANOS.multipliedBy(1_000_000_000));
+  private static final ComparableQuantity<Time> MAX_QUANTITY_TO_DURATION = getQuantity(MAX_DURATION_TO_NANOS.multipliedBy(1_000_000_000));
+  private static final ComparableQuantity<Time> MIN_QUANTITY_TO_DURATION = getQuantity(MIN_DURATION_TO_NANOS.multipliedBy(1_000_000_000));
 
   /**
    * Creates a {@link Quantity<Time>} from a {@link Duration}. The precision is nanoseconds.
@@ -152,7 +154,7 @@ public final class TimeQuantities {
    * @author Chris Hennick
    * @since 1.0.9
    */
-  public static Quantity<Time> getQuantity(Duration duration) {
+  public static ComparableQuantity<Time> getQuantity(Duration duration) {
     Objects.requireNonNull(duration);
     Number nanos;
     if (duration.compareTo(MAX_DURATION_TO_NANOS) > 0 || duration.compareTo(MIN_DURATION_TO_NANOS) < 0) {
@@ -179,21 +181,21 @@ public final class TimeQuantities {
    * @since 1.0.9
    */
   public static Duration getDuration(Quantity<Time> timeQuantity) {
-    if (timeQuantity.compareTo(MAX_QUANTITY_TO_DURATION) > 0 || timeQuantity.compareTo(MIN_QUANTITY_TO_DURATION) < 0) {
+    if (MAX_QUANTITY_TO_DURATION.compareTo(timeQuantity) < 0 || MIN_QUANTITY_TO_DURATION.compareTo(timeQuantity) > 0) {
       throw new ArithmeticException("Conversion to Duration would overflow");
     }
     Number nanos = timeQuantity.to(NANOSECOND).getValue();
     long seconds;
     long remainderNanos;
     if (nanos instanceof BigDecimal) {
-      nanos = nanos.toBigInteger();
+      nanos = ((BigDecimal) nanos).toBigInteger();
     }
     if (nanos instanceof BigInteger) {
       BigInteger[] divided = ((BigInteger) nanos).divideAndRemainder(NANOS_PER_SECOND);
       seconds = divided[0].longValue();
       remainderNanos = divided[1].longValue();
     } else {
-      // redundant: seconds = 0;
+      seconds = 0;
       remainderNanos = nanos.longValue();
     }
     return Duration.ofSeconds(seconds, remainderNanos);

@@ -897,6 +897,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   static {
     for (int i = 0; i < SI_UNITS.length; i++) {
       Unit<?> si = SI_UNITS[i];
+      if (si == null) {
+        // temporary debug code
+        throw new NullPointerException("SI_UNITS[" + i + "] is null!");
+      }
       String symbol = (si instanceof BaseUnit) ? ((BaseUnit<?>) si).getSymbol() : ((AlternateUnit<?>) si).getSymbol();
       DEFAULT.label(si, symbol);
       if (isAllASCII(symbol))
