@@ -273,25 +273,33 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     if (this == obj) {
       return true;
     }
-    if (obj instanceof ProductUnit<?>) {
-      Element[] elems = ((ProductUnit<?>) obj).elements;
-      if (elements.length != elems.length)
-        return false;
-      for (Element element : elements) {
-        boolean unitFound = false;
-        for (Element elem : elems) {
-          if (element.unit.equals(elem.unit))
-            if ((element.pow != elem.pow) || (element.root != elem.root))
-              return false;
-            else {
-              unitFound = true;
-              break;
-            }
-        }
-        if (!unitFound)
+    if (obj instanceof Unit<?>) {
+      if (elements.length == 1
+          && elements[0].unit.equals(obj)
+          && elements[0].pow == elements[0].root)
+        // We're an identity wrapper around obj
+        return true;
+      if (obj instanceof ProductUnit<?>) {
+        Element[] elems = ((ProductUnit<?>) obj).elements;
+        if (elements.length != elems.length)
           return false;
+        for (Element element : elements) {
+          boolean unitFound = false;
+          for (Element elem : elems) {
+            if (element.unit.equals(elem.unit))
+              if ((element.pow != elem.pow) || (element.root != elem.root))
+                return false;
+              else {
+                unitFound = true;
+                break;
+              }
+          }
+          if (!unitFound)
+            return false;
+        }
+        return true;
       }
-      return true;
+      return false;
     }
     return false;
   }
