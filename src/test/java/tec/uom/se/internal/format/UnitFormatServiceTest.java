@@ -38,11 +38,8 @@ import javax.measure.spi.UnitFormatService;
 
 import org.junit.Test;
 
-<<<<<<< HEAD
 import tec.uom.se.format.SimpleUnitFormat;
 
-=======
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 /**
  * Tests for services provided via {@link ServiceProvider}.
  */

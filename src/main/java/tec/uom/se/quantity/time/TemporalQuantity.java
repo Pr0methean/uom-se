@@ -48,6 +48,7 @@ import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
+import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Time;
 
 import tec.uom.se.AbstractQuantity;
@@ -68,7 +69,7 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 
   private final TemporalUnit timeUnit;
   private final Integer value;
-  private final TemporalQuantity amount;
+  private final Duration amount;
 
   /**
    * creates the {@link TemporalQuantity} using {@link TemporalUnit} and {@link Integer}

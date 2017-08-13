@@ -260,10 +260,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
    * </p>
    *
    * @param obj
-   *          the object to compare with. <<<<<<< HEAD
+   *          the object to compare with.
    * @return <code>this.getUnit.equals(obj.getUnit())
-=======
-   * @return <code>this.getUnit.equals(obj.getUnit()) >>>>>>> 1f19911517221c154deb0412afa33a91c7185008 && this.getValue().equals(obj.getValue())
    *         </code>
    */
   @Override
@@ -362,12 +360,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   /**
    * Casts this quantity to a parameterized quantity of specified nature or throw a <code>ClassCastException</code> if the dimension of the specified
    * quantity and its unit's dimension do not match. For example:<br/>
-   * <<<<<<< HEAD <code>
-   *     Quantity<Length> length = AbstractQuantity.parse("2 km").asType(Length.class);
-=======
    * <code>
    *     Quantity<Length> length = AbstractQuantity.parse("2 km").asType(Length.class);
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
    * </code>
    *
    * @param type
@@ -387,12 +381,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
 
   /**
    * Returns the quantity of unknown type corresponding to the specified representation. This method can be used to parse dimensionless quantities.<br/>
-   * <<<<<<< HEAD <code>
-   *     Quatity<Dimensionless> proportion = AbstractQuantity.parse("0.234").asType(Dimensionless.class);
-=======
    * <code>
    *     Quatity<Dimensionless> proportion = AbstractQuantity.parse("0.234").asType(Dimensionless.class);
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
    * </code>
    *
    * <p>
