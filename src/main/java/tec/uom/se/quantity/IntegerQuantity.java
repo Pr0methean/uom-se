@@ -53,14 +53,9 @@ import tec.uom.se.ComparableQuantity;
  */
 final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
-<<<<<<< HEAD
   /**
-     * 
-=======
-  /**
-     * 
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
-     */
+   * 
+   */
   private static final long serialVersionUID = 1405915111744728289L;
 
   final int value;

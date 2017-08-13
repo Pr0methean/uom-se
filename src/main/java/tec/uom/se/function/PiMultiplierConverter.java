@@ -51,14 +51,6 @@ import tec.uom.se.AbstractConverter;
  */
 public final class PiMultiplierConverter extends AbstractConverter implements ValueSupplier<String> {
 
-<<<<<<< HEAD
-  /**
-     * 
-=======
-  /**
-     * 
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
-     */
   private static final long serialVersionUID = -5763262154104962367L;
 
   private static final Logger logger = Logger.getLogger(PiMultiplierConverter.class.getName());

@@ -274,9 +274,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
       return true;
     }
     if (obj instanceof Unit<?>) {
-      if (elements.length == 1
-          && elements[0].unit.equals(obj)
-          && elements[0].pow == elements[0].root)
+      if (elements.length == 1 && elements[0].unit.equals(obj) && elements[0].pow == elements[0].root)
         // We're an identity wrapper around obj
         return true;
       if (obj instanceof ProductUnit<?>) {
@@ -323,8 +321,6 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   }
 
   @Override
-<<<<<<< HEAD
-=======
   public boolean isSystemUnit() {
     for (Element element : elements) {
       if (!(element.unit instanceof AbstractUnit<?> && ((AbstractUnit<?>) element.unit).isSystemUnit())) {
@@ -335,7 +331,6 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   }
 
   @Override
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
   public UnitConverter getSystemConverter() {
     UnitConverter converter = AbstractConverter.IDENTITY;
     for (Element e : elements) {
@@ -424,18 +419,9 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     // Returns or creates instance.
     if (resultIndex == 0)
       return AbstractUnit.ONE;
-<<<<<<< HEAD
     else if ((resultIndex == 1) && (result[0].pow == result[0].root))
       return maybeWrap(result[0].unit);
     else {
-=======
-    else if (resultIndex == 1 && result[0].pow == result[0].root) {
-      if (result[0].unit instanceof AbstractUnit<?>)
-        return (AbstractUnit<?>) (result[0].unit);
-      else
-        return new ProductUnit(result);
-    } else {
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
       Element[] elems = new Element[resultIndex];
       System.arraycopy(result, 0, elems, 0, resultIndex);
       return new ProductUnit(elems);
@@ -443,7 +429,6 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   }
 
   /**
-<<<<<<< HEAD
    * Wraps the given unit in a ProductUnit if it's not already an AbstractUnit.
    */
   private static <Q extends Quantity<Q>> AbstractUnit<Q> maybeWrap(Unit<Q> unit) {
@@ -455,8 +440,6 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   }
 
   /**
-=======
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
    * Returns the greatest common divisor (Euclid's algorithm).
    *
    * @param m

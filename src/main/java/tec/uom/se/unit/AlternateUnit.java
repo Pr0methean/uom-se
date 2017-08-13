@@ -50,14 +50,6 @@ import java.util.Objects;
  */
 public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
-<<<<<<< HEAD
-  /**
-     * 
-=======
-  /**
-     * 
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
-     */
   private static final long serialVersionUID = 4696690756456282705L;
 
   /**
@@ -80,13 +72,8 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
    * @throws IllegalArgumentException
    *           if the specified parent unit is not an {@link AbstractUnit#isSystemUnit() system unit}
    */
-<<<<<<< HEAD
-  public AlternateUnit(Unit<?> parentUnit, String symbol) {
-    if (!((AbstractUnit) parentUnit).isSystemUnit())
-=======
   public AlternateUnit(AbstractUnit<?> parentUnit, String symbol) {
     if (!parentUnit.isSystemUnit())
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
       throw new IllegalArgumentException("The parent unit: " + parentUnit + " is not an unscaled SI unit");
     this.parentUnit = (parentUnit instanceof AlternateUnit) ? ((AlternateUnit) parentUnit).getParentUnit() : parentUnit;
     this.symbol = symbol;

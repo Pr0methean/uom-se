@@ -57,14 +57,6 @@ import java.util.Map;
  */
 public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
-<<<<<<< HEAD
-  /**
-     * 
-=======
-  /**
-     * 
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
-     */
   private static final long serialVersionUID = 1721629233768215930L;
 
   /**

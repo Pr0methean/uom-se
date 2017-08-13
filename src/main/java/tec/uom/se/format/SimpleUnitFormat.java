@@ -94,11 +94,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
    * Holds the standard unit format.
    */
-<<<<<<< HEAD
   private static final FinalDefaultFormat DEFAULT = new FinalDefaultFormat();
-=======
-  private static final DefaultFormat DEFAULT = new DefaultFormat();
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 
   /**
    * Holds the ASCIIFormat unit format.
@@ -111,13 +107,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
    *
    * @return the default unit format (locale sensitive).
    */
-<<<<<<< HEAD
   public static FinalDefaultFormat getInstance() {
     return DEFAULT;
-=======
-  public static SimpleUnitFormat getInstance() {
-    return getInstance(Flavor.Default);
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
   }
 
   /**
@@ -296,15 +287,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   }
 
   /**
-<<<<<<< HEAD
    * This class represents the standard format. Visible only for testing and subclassing.
    */
   public static class DefaultFormat extends SimpleUnitFormat {
-=======
-   * This class represents the standard format.
-   */
-  protected static class DefaultFormat extends SimpleUnitFormat {
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 
     /**
      * Holds the name to unit mapping.
@@ -316,12 +301,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
      */
     final HashMap<Unit<?>, String> _unitToName = new HashMap<>();
 
-<<<<<<< HEAD
     protected DefaultFormat() {
     }
 
-=======
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
     @Override
     public void label(Unit<?> unit, String label) {
       if (!isValidIdentifier(label))
@@ -786,11 +768,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
     @Override
     public Unit<?> parse(CharSequence csq) throws ParserException {
-<<<<<<< HEAD
       // This implementation MUST always return an AbstractUnit<?>, or else
       // FinalDefaultInstance#parse(CharSequence) must be updated!
-=======
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
       return parse(csq, 0);
     }
 
@@ -810,7 +789,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   }
 
   /**
-<<<<<<< HEAD
    * Wrapper around {@link #DefaultFormat} that has narrower return type, but can't be subclassed. The latter class is retained for backward
    * compatibility with any third-party subclasses. Needs to be public so {@link AbstractUnit} can use it with narrowed return type.
    */
@@ -827,8 +805,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   }
 
   /**
-=======
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
    * This class represents the ASCII format.
    */
   protected final static class ASCIIFormat extends DefaultFormat {
@@ -942,13 +918,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   static {
     for (int i = 0; i < SI_UNITS.length; i++) {
       Unit<?> si = SI_UNITS[i];
-<<<<<<< HEAD
-=======
-      if (si == null) {
-        // temporary debug code
-        throw new NullPointerException("SI_UNITS[" + i + "] is null!");
-      }
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
+
       String symbol = (si instanceof BaseUnit) ? ((BaseUnit<?>) si).getSymbol() : ((AlternateUnit<?>) si).getSymbol();
       DEFAULT.label(si, symbol);
       if (isAllASCII(symbol))

@@ -47,10 +47,7 @@ import javax.measure.Quantity;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
-<<<<<<< HEAD
-=======
-import javax.measure.quantity.Frequency;
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
+
 import javax.measure.quantity.Time;
 
 import tec.uom.se.AbstractQuantity;
@@ -64,24 +61,14 @@ import tec.uom.se.quantity.Quantities;
  * @since 1.0
  */
 public final class TemporalQuantity extends AbstractQuantity<Time> {
-<<<<<<< HEAD
   /**
-     * 
-     */
-=======
-  /**
-   *
+   * 
    */
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
   private static final long serialVersionUID = 6835738653744691425L;
 
   private final TemporalUnit timeUnit;
   private final Integer value;
-<<<<<<< HEAD
-  private final TemporalAmount amount;
-=======
-  private final Duration amount;
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
+  private final TemporalQuantity amount;
 
   /**
    * creates the {@link TemporalQuantity} using {@link TemporalUnit} and {@link Integer}
@@ -163,13 +150,8 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
    * 
    * @return this class converted to Quantity
    */
-<<<<<<< HEAD
-  public Quantity<Time> toQuantity() {
-    return Quantities.getQuantity(value, toUnit());
-=======
   public ComparableQuantity<Time> toQuantity() {
     return TimeQuantities.getQuantity(amount).to(toUnit());
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
   }
 
   public TemporalQuantity to(TemporalUnit timeUnit) {
@@ -301,13 +283,8 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
   }
 
   @Override
-<<<<<<< HEAD
-  public ComparableQuantity<?> inverse() {
-    return TimeQuantities.getQuantity(1 / value, timeUnit);
-=======
   public ComparableQuantity<Frequency> inverse() {
     return Quantities.getQuantity(1d / value.doubleValue(), toUnit(timeUnit).inverse()).asType(Frequency.class);
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
   }
 
   @Override

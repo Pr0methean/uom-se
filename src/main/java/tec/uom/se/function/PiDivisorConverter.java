@@ -51,14 +51,6 @@ import tec.uom.se.AbstractConverter;
  */
 final class PiDivisorConverter extends AbstractConverter implements ValueSupplier<String> {
 
-<<<<<<< HEAD
-  /**
-   * 
-=======
-  /**
-   * 
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
-   */
   private static final long serialVersionUID = 5052794216568914141L;
 
   /**

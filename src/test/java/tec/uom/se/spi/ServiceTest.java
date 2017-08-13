@@ -40,7 +40,6 @@ import org.junit.Test;
 
 import tec.uom.se.format.SimpleUnitFormat;
 
-
 /**
  * Tests for services provided via {@link ServiceProvider}.
  */

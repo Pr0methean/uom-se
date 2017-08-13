@@ -33,12 +33,9 @@ import static tec.uom.se.unit.Units.SECOND;
 import static tec.uom.se.unit.Units.HOUR;
 import static tec.uom.se.unit.Units.DAY;
 
-<<<<<<< HEAD
-=======
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.Duration;
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
@@ -52,10 +49,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Time;
 
-<<<<<<< HEAD
-=======
 import tec.uom.se.ComparableQuantity;
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.TransformedUnit;
@@ -143,8 +137,6 @@ public final class TimeQuantities {
     return getQuantity(localTimeA, localTimeB);
   }
 
-<<<<<<< HEAD
-=======
   // Constants used only to convert to and from Duration
   private static final BigInteger NANOS_PER_SECOND = BigInteger.valueOf(1_000_000_000);
   private static final Duration MAX_DURATION_TO_NANOS = Duration.ofNanos(Long.MAX_VALUE);
@@ -209,7 +201,6 @@ public final class TimeQuantities {
     return Duration.ofSeconds(seconds, remainderNanos);
   }
 
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
   /**
    * creates the {@link TimeUnitQuantity} using {@link TimeUnit} and {@link Integer}
    * 

@@ -29,17 +29,14 @@
  */
 package tec.uom.se.unit;
 
-<<<<<<< HEAD
 import java.util.Objects;
-=======
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
 /**
  * Inner product element represents a rational power of a single unit.
  */
-final class ElementProduct<T extends Quantity<T>> {
+final class ProductElement<T extends Quantity<T>> {
 
   /**
    * Holds the single unit.
@@ -66,7 +63,7 @@ final class ElementProduct<T extends Quantity<T>> {
    * @param root
    *          the root exponent.
    */
-  ElementProduct(Unit<T> unit, int pow, int root) {
+  ProductElement(Unit<T> unit, int pow, int root) {
     this.unit = unit;
     this.pow = pow;
     this.root = root;
@@ -98,22 +95,20 @@ final class ElementProduct<T extends Quantity<T>> {
   public int getRoot() {
     return root;
   }
-<<<<<<< HEAD
-  
+
   @Override
   public boolean equals(Object that) {
     if (this == that)
-        return true;
+      return true;
     if (that instanceof ProductElement) {
-      return unit.equals(that.unit)
-          && ((double)pow)/root == ((double)that.pow)/root;
-    } else return false;
+      ProductElement thatPE = (ProductElement) that;
+      return unit.equals(thatPE.unit) && ((double) pow) / root == ((double) thatPE.pow) / thatPE.root;
+    } else
+      return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(unit, ((double)pow)/root);
+    return Objects.hash(unit, ((double) pow) / root);
   }
-=======
->>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 }
