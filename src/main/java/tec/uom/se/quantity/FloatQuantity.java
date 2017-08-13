@@ -53,8 +53,13 @@ import tec.uom.se.ComparableQuantity;
  */
 final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
+<<<<<<< HEAD
   /**
      * 
+=======
+  /**
+     * 
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
      */
   private static final long serialVersionUID = 5992028803791009345L;
 

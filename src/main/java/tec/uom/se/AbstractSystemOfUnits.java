@@ -118,8 +118,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits, Nameable {
   protected static class Helper {
     static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, Dimension dimension) {
 	    if (dimension != null) {
-		return units.stream().filter(u -> dimension.equals(u.getDimension())).collect(Collectors.toSet());
-
+		    return units.stream().filter(u -> dimension.equals(u.getDimension())).collect(Collectors.toSet());
 	    }
 	    return null;
 	}

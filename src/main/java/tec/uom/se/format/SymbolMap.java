@@ -144,7 +144,11 @@ public final class SymbolMap {
 
   /**
    * Attaches a label to the specified unit. For example:<br>
+<<<<<<< HEAD
    * <code> symbolMap.label(DAY.multiply(365), "year"); symbolMap.label(US.FOOT, "ft");
+=======
+   * <code> symbolMap.label(DAY.multiply(365), "year"); symbolMap.label(US.FOOT, "ft");
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
    * </code>
    *
    * @param unit
@@ -159,7 +163,11 @@ public final class SymbolMap {
 
   /**
    * Attaches an alias to the specified unit. Multiple aliases may be attached to the same unit. Aliases are used during parsing to recognize
+<<<<<<< HEAD
    * different variants of the same unit.<code> symbolMap.alias(US.FOOT, "foot"); symbolMap.alias(US.FOOT, "feet");
+=======
+   * different variants of the same unit.<code> symbolMap.alias(US.FOOT, "foot"); symbolMap.alias(US.FOOT, "feet");
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
    * symbolMap.alias(Units.METER, "meter"); symbolMap.alias(Units.METER, "metre"); </code>
    *
    * @param unit
@@ -173,7 +181,11 @@ public final class SymbolMap {
 
   /**
    * Attaches a label to the specified prefix. For example:<br>
+<<<<<<< HEAD
    * <code> symbolMap.label(MetricPrefix.GIGA, "G"); symbolMap.label(MetricPrefix.MICRO, "µ");
+=======
+   * <code> symbolMap.label(MetricPrefix.GIGA, "G"); symbolMap.label(MetricPrefix.MICRO, "µ");
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
    * </code>
    */
   public void label(MetricPrefix prefix, String symbol) {
@@ -211,6 +223,7 @@ public final class SymbolMap {
    *          the unit symbol.
    * @return the corresponding prefix or <code>null</code> if none.
    */
+<<<<<<< HEAD
   public MetricPrefix getPrefix(String symbol) {
 	final List<String> list = symbolToPrefix.keySet().stream().collect(Collectors.toList());
 	final Comparator<String> comparator = Comparator.comparing(String::length);
@@ -223,6 +236,20 @@ public final class SymbolMap {
 	}
 	return null;
     }
+=======
+  public MetricPrefix getPrefix(String symbol) {
+	final List<String> list = symbolToPrefix.keySet().stream().collect(Collectors.toList());
+	final Comparator<String> comparator = Comparator.comparing(String::length);
+	Collections.sort(list, comparator.reversed());
+
+	for (String key : list) {
+	    if (symbol.startsWith(key)) {
+		return (MetricPrefix) symbolToPrefix.get(key);
+	    }
+	}
+	return null;
+    }
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 
   /**
    * Returns the prefix for the specified converter.

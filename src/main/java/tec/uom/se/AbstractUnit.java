@@ -172,7 +172,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    * @throws ParserException
    *           if the specified character sequence cannot be correctly parsed (e.g. not UCUM compliant).
    */
+<<<<<<< HEAD
   public static AbstractUnit<?> parse(CharSequence charSequence) {
+=======
+  public static Unit<?> parse(CharSequence charSequence) {
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
     return SimpleUnitFormat.getInstance().parse(charSequence);
   }
 
@@ -383,9 +387,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    */
   protected final AbstractUnit<?> multiply(AbstractUnit<?> that) {
     if (this.equals(ONE))
-      return that;
+      return ONE;
     if (that.equals(ONE))
-      return this;
+      return ONE;
     return ProductUnit.getProductInstance(this, that);
   }
 

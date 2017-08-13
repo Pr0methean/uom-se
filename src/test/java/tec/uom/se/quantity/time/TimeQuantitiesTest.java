@@ -33,6 +33,8 @@ import static tec.uom.se.unit.Units.DAY;
 import static tec.uom.se.unit.Units.HOUR;
 import static tec.uom.se.unit.Units.MINUTE;
 import static tec.uom.se.unit.Units.SECOND;
+import static tec.uom.se.unit.Units.HERTZ;
+
 import static java.time.temporal.ChronoUnit.*;
 
 import java.time.DayOfWeek;
@@ -43,9 +45,11 @@ import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
+import java.util.concurrent.TimeUnit;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
+import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Time;
 
 import org.junit.Assert;
@@ -198,4 +202,20 @@ public class TimeQuantitiesTest {
 				Integer.valueOf(time.getValue().intValue()));
 		Assert.assertEquals(Units.HOUR, time.getUnit());
 	}
+
+  @Test
+  public void inverseTest_TemporalQuantity() {
+    Quantity<Time> tenSeconds = TimeQuantities.getQuantity(10, SECONDS);
+    Quantity<Frequency> perTenSeconds = (Quantity<Frequency>) (tenSeconds.inverse());
+    Assert.assertEquals(0.1, perTenSeconds.getValue().doubleValue(), 1E-15);
+    Assert.assertTrue(HERTZ.isEquivalentOf(perTenSeconds.getUnit()));
+  }
+
+  @Test
+  public void inverseTest_TimeUnitQuantity() {
+    Quantity<Time> tenSeconds = TimeQuantities.getQuantity(10, TimeUnit.SECONDS);
+    Quantity<Frequency> perTenSeconds = (Quantity<Frequency>) (tenSeconds.inverse());
+    Assert.assertEquals(0.1, perTenSeconds.getValue().doubleValue(), 1E-15);
+    Assert.assertTrue(HERTZ.isEquivalentOf(perTenSeconds.getUnit()));
+  }
 }

@@ -44,6 +44,10 @@ import javax.measure.Quantity;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
+<<<<<<< HEAD
+=======
+import javax.measure.quantity.Frequency;
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 import javax.measure.quantity.Time;
 
 import tec.uom.se.AbstractQuantity;
@@ -60,8 +64,13 @@ import tec.uom.se.quantity.Quantities;
  */
 public final class TimeUnitQuantity extends AbstractQuantity<Time> {
 
+<<<<<<< HEAD
   /**
      * 
+=======
+  /**
+     * 
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
      */
   private static final long serialVersionUID = -5840251813363744230L;
 
@@ -299,8 +308,13 @@ public final class TimeUnitQuantity extends AbstractQuantity<Time> {
    * @since 1.0.1
    */
   @Override
+<<<<<<< HEAD
   public ComparableQuantity<?> inverse() {
     return TimeQuantities.getQuantity(1 / value, timeUnit);
+=======
+  public ComparableQuantity<Frequency> inverse() {
+    return (Quantities.getQuantity(1.0 / value, toUnit(timeUnit).inverse())).asType(Frequency.class);
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
   }
 
   /**

@@ -46,10 +46,17 @@ import tec.uom.se.AbstractUnit;
  * </p>
  *
  * <p>
+<<<<<<< HEAD
  * Examples of transformed units:<code>
  *         CELSIUS = KELVIN.shift(273.15);
  *         FOOT = METRE.multiply(3048).divide(10000);
  *         MILLISECOND = MILLI(SECOND);
+=======
+ * Examples of transformed units:<code>
+ *         CELSIUS = KELVIN.shift(273.15);
+ *         FOOT = METRE.multiply(3048).divide(10000);
+ *         MILLISECOND = MILLI(SECOND);
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
  *     </code>
  * </p>
  *
@@ -72,8 +79,13 @@ import tec.uom.se.AbstractUnit;
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
+<<<<<<< HEAD
   /**
      *
+=======
+  /**
+     *
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
      */
   private static final long serialVersionUID = 1L;
 

@@ -29,7 +29,10 @@
  */
 package tec.uom.se.unit;
 
+<<<<<<< HEAD
 import java.util.Objects;
+=======
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
@@ -95,6 +98,7 @@ final class ElementProduct<T extends Quantity<T>> {
   public int getRoot() {
     return root;
   }
+<<<<<<< HEAD
   
   @Override
   public boolean equals(Object that) {
@@ -110,4 +114,6 @@ final class ElementProduct<T extends Quantity<T>> {
   public int hashCode() {
     return Objects.hash(unit, ((double)pow)/root);
   }
+=======
+>>>>>>> 1f19911517221c154deb0412afa33a91c7185008
 }
