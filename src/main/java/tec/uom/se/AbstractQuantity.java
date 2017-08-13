@@ -262,6 +262,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
    * @param obj
    *          the object to compare with.
    * @return <code>this.getUnit.equals(obj.getUnit())
+   *             && this.getValue().equals(obj.getValue())
    *         </code>
    */
   @Override
