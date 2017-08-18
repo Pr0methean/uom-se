@@ -47,6 +47,7 @@ import javax.measure.Quantity;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
+import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Time;
 
 import tec.uom.se.AbstractQuantity;
@@ -282,8 +283,8 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
   }
 
   @Override
-  public ComparableQuantity<?> inverse() {
-    return Quantities.getQuantity(1.0 / value, toUnit(timeUnit).inverse());
+  public ComparableQuantity<Frequency> inverse() {
+    return Quantities.getQuantity(1.0 / value, toUnit(timeUnit).inverse().asType(Frequency.class));
   }
 
   @Override
